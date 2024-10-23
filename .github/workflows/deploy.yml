@@ -20,8 +20,8 @@ jobs:
 
       - name: Copy files to EC2
         run: |
-          scp -o StrictHostKeyChecking=no -r . ec2-user@18.224.19.205:/home/ec2-user/myAnswerBook/
+          scp -o StrictHostKeyChecking=no -r . ec2-user@18.224.19.205:/home/ec2-user/my_app/
 
       - name: Run deployment script on EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ec2-user@18.224.19.205 'bash /home/ec2-user/myAnswerBook/deploy.sh'
+          ssh -o StrictHostKeyChecking=no ec2-user@18.224.19.205 'bash /home/ec2-user/my_app/deploy.sh'
