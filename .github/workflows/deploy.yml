@@ -1,0 +1,27 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main  # Change to your default branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Add SSH key
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+
+      - name: Copy files to EC2
+        run: |
+          scp -o StrictHostKeyChecking=no -r . ec2-user@18.224.19.205:/home/ec2-user/myAnswerBook/
+
+      - name: Run deployment script on EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ec2-user@18.224.19.205 'bash /home/ec2-user/myAnswerBook/deploy.sh'
