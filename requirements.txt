@@ -2,7 +2,7 @@ annotated-types==0.7.0
 anyio==4.6.2.post1
 attrs==20.3.0
 aws-cfn-bootstrap==2.0
-awscli==2.15.30
+awscli
 awscrt==0.19.19
 Babel==2.9.1
 certifi==2024.8.30
@@ -15,7 +15,7 @@ colorama==0.4.4
 configobj==5.0.6
 cryptography==36.0.1
 dbus-python==1.2.18
-distro==1.9.0
+distro
 docutils==0.16
 ec2-hibinit-agent==1.0.8
 exceptiongroup==1.2.2
