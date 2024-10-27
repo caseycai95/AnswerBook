@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from dotenv import load_dotenv
 import os
 import openai
@@ -17,8 +17,8 @@ def read_root():
     return {"message": "Welcome to the Answerbook!"}
 
 
-@app.get("/answer/{question}")
-def get_answer(question):
+@app.get("/answer")
+def get_answer(question: str = Query(None, description="The question you want to ask")):
     if not question:
         raise HTTPException(
             status_code=400,
