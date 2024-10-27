@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from dotenv import load_dotenv
 import os
 import openai
@@ -19,6 +19,12 @@ def read_root():
 
 @app.get("/answer/{question}")
 def get_answer(question):
+    if not question:
+        raise HTTPException(
+            status_code=400,
+            detail="Question cannot be empty. Please provide a valid question."
+        )
+
     gpt_answer = get_answer_from_chatgpt(question)
     return {"question": f"hello, your question is {question}",
             "gpt_answer": {gpt_answer}}
