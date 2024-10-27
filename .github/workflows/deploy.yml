@@ -21,11 +21,11 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t caseyc24/answerbook-app:latest 
+          docker build -t caseyc24/answerbook-app:latest . 
 
       - name: Push Docker image to Docker Hub
         run: |
-          docker push caseyc24/answerbook-app:latest.
+          docker push caseyc24/answerbook-app:latest
 
       - name: Add SSH key
         uses: webfactory/ssh-agent@v0.5.3
