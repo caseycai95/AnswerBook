@@ -6,7 +6,7 @@ PORT = 8080
 # Command to start the API
 start:
 	@echo "Starting $(APP_NAME) API..."
-	uvicorn main:app --host $(HOST) --port $(PORT)
+	uvicorn main:app --host $(HOST) --port $(PORT) --reload
 
 # Command to stop (optional, if using a background process manager like pm2)
 stop:

@@ -1,4 +1,6 @@
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, Request
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
 from dotenv import load_dotenv
 import os
 import openai
@@ -9,12 +11,16 @@ load_dotenv()
 # Get the API key from environment variables
 api_key = os.getenv("OPENAI_API_KEY")
 
+
 app = FastAPI()
 
+# 使用 Jinja2 模板渲染
+templates = Jinja2Templates(directory="templates")
 
-@app.get("/")
-def read_root():
-    return {"message": "Welcome to the Answerbook!"}
+
+@app.get("/", response_class=HTMLResponse)
+def read_root(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 @app.get("/answer")
@@ -24,7 +30,6 @@ def get_answer(question: str = Query(None, description="The question you want to
             status_code=400,
             detail="Question cannot be empty. Please provide a valid question."
         )
-
     gpt_answer = get_answer_from_chatgpt(question)
     return {"question": f"hello, your question is {question}",
             "gpt_answer": {gpt_answer}}
